@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <title>Quinceañera Countdown</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    /* Page styling */
     body {
       margin: 0;
       height: 100vh;
@@ -14,20 +14,26 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f8cdda, #fbc2eb);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #fceabb, #f8b195, #f67280, #c06c84);
       color: #333;
       text-align: center;
+      overflow: hidden;
+      position: relative;
     }
 
     h1 {
       margin-bottom: 10px;
       font-size: 2.5rem;
+      text-shadow: 2px 2px 6px #fff;
     }
 
     #quince-date {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-bottom: 30px;
+      font-weight: bold;
+      color: #fff;
+      text-shadow: 1px 1px 3px #00000050;
     }
 
     .countdown {
@@ -37,20 +43,55 @@
     }
 
     .time-box {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 15px 20px;
-      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px 25px;
+      border-radius: 15px;
       min-width: 90px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .time-box:hover {
+      transform: scale(1.1);
     }
 
     .number {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: bold;
+      color: #f67280;
     }
 
     .label {
       font-size: 0.9rem;
       text-transform: uppercase;
+      color: #555;
+    }
+
+    /* Balloon animation */
+    .balloon {
+      position: absolute;
+      width: 50px;
+      height: 70px;
+      border-radius: 50% 50% 50% 50%;
+      background-color: #fff;
+      animation: float 8s linear infinite;
+      opacity: 0.8;
+    }
+
+    .balloon::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 20px;
+      background: #555;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
+      50% { transform: translateY(50vh) translateX(50px) rotate(10deg); }
+      100% { transform: translateY(-100px) translateX(-50px) rotate(-10deg); }
     }
   </style>
 </head>
@@ -82,10 +123,10 @@
   </div>
 
   <script>
-    // SET THE QUINCE DATE HERE (replace with actual date/time)
+    // Set the Quince date
     const quinceDate = new Date("2028-01-15T18:00:00");
 
-    // Display the formatted date
+    // Show the formatted date
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' };
     document.getElementById("quince-date").textContent = `Date: ${quinceDate.toLocaleString('en-US', options)}`;
 
@@ -112,6 +153,16 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    // Generate balloons randomly
+    for (let i = 0; i < 20; i++) {
+      const balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 80%)`;
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.animationDuration = (5 + Math.random()*5) + 's';
+      document.body.appendChild(balloon);
+    }
   </script>
 
 </body>
