@@ -6,129 +6,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    /* Page styling */
+    :root {
+      --primary: #f67280;
+      --bg-gradient: linear-gradient(135deg, #fceabb, #f8b195, #f67280, #c06c84);
+    }
+
+    /* Base reset */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(135deg, #fceabb, #f8b195, #f67280, #c06c84);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-gradient);
       color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Main container prevents over-stretching */
+    .container {
+      width: min(100%, 1100px);
+      padding: clamp(1rem, 4vw, 3rem);
       text-align: center;
-      overflow: hidden;
       position: relative;
     }
 
     h1 {
-      margin-bottom: 10px;
-      font-size: 2.5rem;
-      text-shadow: 2px 2px 6px #fff;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      margin-bottom: 0.5em;
+      text-shadow: 2px 2px 6px rgba(255,255,255,0.6);
     }
 
     #quince-date {
-      font-size: 1.3rem;
-      margin-bottom: 30px;
-      font-weight: bold;
+      font-size: clamp(1rem, 3vw, 1.3rem);
+      font-weight: 600;
+      margin-bottom: clamp(1.5rem, 5vw, 3rem);
       color: #fff;
-      text-shadow: 1px 1px 3px #00000050;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
     }
 
+    /* Countdown layout */
     .countdown {
       display: flex;
-      gap: 20px;
-      font-size: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(0.75rem, 3vw, 1.5rem);
     }
 
     .time-box {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 20px 25px;
-      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.92);
+      padding: clamp(1rem, 3vw, 1.5rem);
+      border-radius: 1rem;
       min-width: 90px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
     }
 
     .time-box:hover {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
 
     .number {
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #f67280;
+      font-size: clamp(1.8rem, 5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--primary);
     }
 
     .label {
-      font-size: 0.9rem;
+      font-size: clamp(0.7rem, 2vw, 0.9rem);
       text-transform: uppercase;
+      letter-spacing: 0.08em;
       color: #555;
     }
 
-    /* Balloon animation */
+    /* Balloons */
     .balloon {
       position: absolute;
-      width: 50px;
-      height: 70px;
-      border-radius: 50% 50% 50% 50%;
-      background-color: #fff;
-      animation: float 8s linear infinite;
-      opacity: 0.8;
+      width: clamp(30px, 5vw, 50px);
+      height: clamp(45px, 7vw, 70px);
+      border-radius: 50%;
+      animation: float linear infinite;
+      opacity: 0.75;
     }
 
     .balloon::after {
       content: '';
       position: absolute;
-      bottom: -20px;
+      bottom: -18px;
       left: 50%;
       width: 2px;
-      height: 20px;
+      height: 18px;
       background: #555;
     }
 
     @keyframes float {
-      0% { transform: translateY(100vh) translateX(0) rotate(0deg); }
-      50% { transform: translateY(50vh) translateX(50px) rotate(10deg); }
-      100% { transform: translateY(-100px) translateX(-50px) rotate(-10deg); }
+      from { transform: translateY(110vh); }
+      to { transform: translateY(-120px); }
+    }
+
+    /* Reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      .balloon,
+      .time-box:hover {
+        animation: none;
+        transform: none;
+      }
+    }
+
+    /* Small screens */
+    @media (max-width: 480px) {
+      .time-box {
+        min-width: 70px;
+      }
     }
   </style>
 </head>
+
 <body>
+  <div class="container">
+    <h1>🎉 Countdown to the Quinceañera 🎉</h1>
+    <p id="quince-date"></p>
 
-  <h1>🎉 Countdown to Aleena's Quinceañera 🎉</h1>
-  <p id="quince-date"></p>
-
-  <div class="countdown">
-    <div class="time-box">
-      <div id="days" class="number">0</div>
-      <div class="label">Days</div>
-    </div>
-
-    <div class="time-box">
-      <div id="hours" class="number">0</div>
-      <div class="label">Hours</div>
-    </div>
-
-    <div class="time-box">
-      <div id="minutes" class="number">0</div>
-      <div class="label">Minutes</div>
-    </div>
-
-    <div class="time-box">
-      <div id="seconds" class="number">0</div>
-      <div class="label">Seconds</div>
+    <div class="countdown">
+      <div class="time-box">
+        <div id="days" class="number">0</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="time-box">
+        <div id="hours" class="number">0</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="time-box">
+        <div id="minutes" class="number">0</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="time-box">
+        <div id="seconds" class="number">0</div>
+        <div class="label">Seconds</div>
+      </div>
     </div>
   </div>
 
   <script>
-    // Set the Quince date
-    const quinceDate = new Date("2028-01-15T18:00:00");
+    // Event date configuration
+    const quinceDate = new Date("2026-06-15T18:00:00");
 
-    // Show the formatted date
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' };
-    document.getElementById("quince-date").textContent = `Date: ${quinceDate.toLocaleString('en-US', options)}`;
+    const options = {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit'
+    };
+
+    document.getElementById("quince-date").textContent =
+      `Date: ${quinceDate.toLocaleString('en-US', options)}`;
 
     function updateCountdown() {
       const now = new Date();
@@ -140,30 +178,28 @@
       }
 
       const totalSeconds = Math.floor(diff / 1000);
-      const days = Math.floor(totalSeconds / (60 * 60 * 24));
-      const hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-      const minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-      const seconds = totalSeconds % 60;
-
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+      document.getElementById("days").textContent =
+        Math.floor(totalSeconds / 86400);
+      document.getElementById("hours").textContent =
+        Math.floor((totalSeconds % 86400) / 3600);
+      document.getElementById("minutes").textContent =
+        Math.floor((totalSeconds % 3600) / 60);
+      document.getElementById("seconds").textContent =
+        totalSeconds % 60;
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
-    // Generate balloons randomly
-    for (let i = 0; i < 20; i++) {
-      const balloon = document.createElement('div');
-      balloon.classList.add('balloon');
-      balloon.style.backgroundColor = `hsl(${Math.random()*360}, 70%, 80%)`;
-      balloon.style.left = Math.random() * 100 + 'vw';
-      balloon.style.animationDuration = (5 + Math.random()*5) + 's';
+    // Generate responsive balloons
+    for (let i = 0; i < 18; i++) {
+      const balloon = document.createElement("div");
+      balloon.className = "balloon";
+      balloon.style.left = Math.random() * 100 + "vw";
+      balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`;
+      balloon.style.animationDuration = (6 + Math.random() * 6) + "s";
       document.body.appendChild(balloon);
     }
   </script>
-
 </body>
 </html>
