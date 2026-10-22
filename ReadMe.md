@@ -1,133 +1,148 @@
-# 🎉 Quinceañera Countdown Website
+# Quinceañera Countdown Website
 
-A fully client-side, animated countdown website built to celebrate a Quinceañera by counting down the days, hours, minutes, and seconds until the event. Designed to be visually festive, mobile-friendly, and easy to deploy using GitHub Pages.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Pages](https://img.shields.io/badge/Hosted%20With-GitHub%20Pages-blue.svg)](https://pages.github.com/)
 
-This project demonstrates clean HTML/CSS structure, real-time JavaScript date calculations, lightweight animations, and static-site hosting best practices.
-
----
-
-## ✨ Features
-
-- ⏳ **Live countdown timer**
-  - Displays days, hours, minutes, and seconds remaining
-  - Updates every second using JavaScript
-- 📅 **Human-readable event date**
-  - Automatically formatted from a single date configuration
-- 🎈 **Festive animated UI**
-  - Floating pastel balloons using pure CSS + JS
-  - Hover animations for countdown elements
-- 📱 **Responsive design**
-  - Looks great on mobile, tablet, and desktop
-- 🌐 **Static & fast**
-  - No backend, no frameworks, no dependencies
-- 🚀 **Free hosting via GitHub Pages**
+**Quinceañera Countdown** is a fully client-side, lightweight, and animated static web application engineered to celebrate and count down the days, hours, minutes, and seconds leading up to a Quinceañera. Designed with a festive aesthetic, smooth CSS/JS animations, and a mobile-first responsive layout, it requires zero server-side dependencies and deploys instantly via GitHub Pages.
 
 ---
 
-## 🛠️ Technologies Used
+## Table of Contents
 
-- **HTML5**
-  - Semantic structure
-  - Single-file deployment
-- **CSS3**
-  - Flexbox layout
-  - Gradients, shadows, hover effects
-  - Keyframe animations
-- **Vanilla JavaScript**
-  - Date/time calculations
-  - DOM manipulation
-  - Interval-based updates
-- **GitHub Pages**
-  - Static site hosting
+* [Key Features](#key-features)
+* [Architecture & Single-File Design](#architecture--single-file-design)
+* [Technologies Used](#technologies-used)
+* [Configuration](#configuration)
+* [Deployment](#deployment)
+* [Planned Roadmap & Enhancements](#planned-roadmap--enhancements)
+* [Contributing](#contributing)
+* [License](#license)
 
 ---
 
-## 📂 Project Structure
+## Key Features
+
+* **Real-Time Precision Timer**: Calculates days, hours, minutes, and seconds remaining using client-side JavaScript updated on a strict 1-second interval.
+* **Automated Date Formatting**: Renders a human-readable event date automatically derived from the target JavaScript configuration.
+* **Pure CSS & Vanilla JS Animations**: Dynamic floating pastel balloons and responsive UI microinteractions built without heavy external animation libraries.
+* **Zero-Dependency Single-File Architecture**: Built completely with vanilla HTML5, CSS3, and JavaScript—no frameworks, build steps, or npm packages required.
+* **Fully Responsive**: Mobile-first design tailored for optimal display across smartphones, tablets, and desktop displays.
+* **GitHub Pages Native**: Designed specifically for zero-cost static hosting and instantaneous deployment.
+
+---
+
+## Architecture & Single-File Design
+
+The repository intentionally enforces a minimal **Single-File Architecture** (`index.html`) containing the semantic HTML layout, CSS stylesheet rules, and vanilla JavaScript engine. This keeps maintenance lightweight, prevents dependency bloat, and makes static site hosting effortless.
+
+```
 quince/
-├── index.html # Entire website (HTML, CSS, JS)
-└── README.md # Project documentation
+├── index.html        # Unified application (HTML layout, CSS styling, JS engine)
+├── LICENSE           # Open-source license terms
+└── README.md         # Technical documentation
+```
 
+### Application Flow
 
-This project intentionally uses a **single-file architecture** to keep deployment and maintenance simple.
+```
++-------------------------------------------------------+
+|                    index.html                         |
++-------------------------------------------------------+
+                           |
+            +--------------+--------------+
+            |                             |
+            v                             v
++-----------------------+     +-----------------------+
+|  CSS Engine           |     |  JavaScript Core      |
+|  - Keyframe Floating  |     |  - Date Calculation   |
+|  - Responsive Layout  |     |  - Interval Updates   |
+|  - Hover States       |     |  - DOM Manipulation   |
++-----------------------+     +-----------------------+
+                                          |
+                                          v
+                              +-----------------------+
+                              | Render Live Countdown |
+                              +-----------------------+
+```
 
 ---
 
-## ⚙️ Configuration
+## Technologies Used
 
-To customize the countdown for a specific event, update **one line** in `index.html`:
+* **HTML5**: Semantic web markup for accessibility and efficient DOM parsing.
+* **CSS3**: Flexbox layout modeling, gradient overlays, box shadows, and native `@keyframes` keyframe animations.
+* **Vanilla JavaScript (ES6+)**: Local timezone handling, DOM selection, and interval-driven date arithmetic.
+* **GitHub Pages**: Free static site hosting and continuous deployment directly from the repository main branch.
 
-```js
+---
+
+## Configuration
+
+To customize the website for a specific event, modify the single target date string in **`index.html`**:
+
+```javascript
+// Set the target Quinceañera event date and time (ISO format)
 const quinceDate = new Date("2026-06-15T18:00:00");
 ```
 
-The countdown uses the visitor’s local time zone by default.
+> **Note**: The countdown automatically interprets the target string and evaluates the remaining time against the visitor's local system timezone.
 
-## 🔮 Planned Enhancements & Optimizations
+---
 
-The following improvements are planned to expand this project beyond a basic countdown into a polished, reusable, and production-ready static event site.
+## Deployment
+
+### Deploying to GitHub Pages
+
+1. Fork or clone this repository:
+   ```bash
+   git clone https://github.com/ajthiesen/quince.git
+   cd quince
+   ```
+2. Push your changes to your GitHub repository.
+3. In your GitHub repository, navigate to **Settings** > **Pages**.
+4. Under **Build and deployment** > **Source**, select `Deploy from a branch`.
+5. Select the `main` branch and `/ (root)` folder, then click **Save**.
+6. Your website will be live at `https://<your-username>.github.io/quince/`.
+
+---
+
+## Planned Roadmap & Enhancements
+
+Below is the structured technical roadmap for expanding the project into a multi-theme, fully customizable event platform.
 
 ### 🎨 Visual & Design Enhancements
-- [ ] Implement a theme system using CSS variables (e.g., pink/gold, pastel, elegant black)
-- [ ] Improve typography with curated font pairings (decorative headers + readable body)
-- [ ] Add background image support with gradient overlays
-- [ ] Introduce subtle glow and pulse effects for countdown numbers
-- [ ] Support seasonal or event-based visual modes (balloons, sparkles, confetti)
+- [ ] **CSS Variable Theme System**: Support interchangeable color palettes (e.g., Pink/Gold, Royal Blue, Pastel Lavender, Elegant Black).
+- [ ] **Curated Typography**: Introduce Google Fonts integrations (decorative headers paired with high-readability body fonts).
+- [ ] **Dynamic Visual Modes**: Add toggleable seasonal visual overlay effects (sparkles, confetti, or balloons).
 
 ### 🎉 Animation & Interaction
-- [ ] Add flip-clock or smooth number transition animations
-- [ ] Implement microinteractions for hover and focus states
-- [ ] Create a celebration sequence when the countdown reaches zero
-- [ ] Add optional confetti or fireworks animation at event start
-- [ ] Respect user motion preferences (`prefers-reduced-motion`)
+- [ ] **Flip-Clock Animations**: Smooth numerical transitions on second/minute updates.
+- [ ] **Event Start Celebration**: Trigger a high-impact celebration sequence (confetti/fireworks canvas explosion) when the timer reaches zero.
+- [ ] **Accessibility Motion Limits**: Respect `prefers-reduced-motion` CSS media queries.
 
-### 📱 User Experience & Accessibility
-- [ ] Optimize layout for small screens and vertical orientations
-- [ ] Add ARIA labels and improve screen reader compatibility
-- [ ] Implement high-contrast and reduced-motion modes
-- [ ] Improve keyboard navigation and focus states
-- [ ] Ensure color contrast meets WCAG guidelines
+### 🌐 Accessibility & Localization
+- [ ] **Bilingual Support**: Instant toggle between English and Spanish language localization.
+- [ ] **Timezone Pinning**: Option to lock the target timezone explicitly rather than defaulting to client local time.
+- [ ] **WCAG Compliance**: High-contrast modes and screen reader ARIA live region updates.
 
-### 🌍 Localization & Time Handling
-- [ ] Add English / Spanish language toggle
-- [ ] Localize date and time formatting based on locale
-- [ ] Lock countdown to a specific event timezone
-- [ ] Display event timezone explicitly for remote guests
-- [ ] Handle daylight saving time edge cases
+### 🔗 Engagement & Integrations
+- [ ] **Calendar Export**: "Add to Calendar" action buttons for Google, Apple, and Outlook calendars.
+- [ ] **Social Sharing**: Pre-configured Open Graph metadata tags for rich link previews across messaging apps and social platforms.
 
-### 🧠 JavaScript Architecture Improvements
-- [ ] Centralize event configuration in a single config object
-- [ ] Modularize countdown logic, UI updates, and animations
-- [ ] Reduce global variables and improve encapsulation
-- [ ] Optimize DOM updates for performance
-- [ ] Add graceful fallbacks for invalid or missing configuration
+---
 
-### 🎶 Media & Content Features
-- [ ] Add optional background music with user-controlled playback
-- [ ] Include image or photo slideshow support
-- [ ] Support captions or event messaging blocks
-- [ ] Add optional video embed for invitations or messages
+## Contributing
 
-### 🔗 Sharing & Engagement
-- [ ] Add “Add to Calendar” functionality (Google / Apple / Outlook)
-- [ ] Generate shareable links or QR codes
-- [ ] Add social media preview metadata (Open Graph / Twitter Cards)
-- [ ] Create share buttons for messaging platforms
+Contributions, bug reports, and design suggestions are welcome!
 
-### 🚀 Deployment & Performance
-- [ ] Optimize animations and assets for GitHub Pages hosting
-- [ ] Add basic service worker for offline support
-- [ ] Cache static assets for faster repeat visits
-- [ ] Improve load performance on low-power mobile devices
+1. Fork the Repository.
+2. Create your Feature Branch (`git checkout -b feature/NewFeature`).
+3. Commit your Changes (`git commit -m 'Add NewFeature'`).
+4. Push to the Branch (`git push origin feature/NewFeature`).
+5. Open a Pull Request.
 
-### 📚 Documentation & Portfolio Polish
-- [ ] Add screenshots and animated GIFs to README
-- [ ] Provide customization examples and templates
-- [ ] Document configuration options clearly
-- [ ] Add multiple demo themes or example pages
-- [ ] Maintain clean, descriptive commit history
+---
 
-### 🧪 Quality & Reliability
-- [ ] Add basic error handling and user-friendly messages
-- [ ] Validate date/time inputs
-- [ ] Handle countdown completion edge cases cleanly
-- [ ] Test across major browsers and devices
+## License
+
+This project is open-source and licensed under the [MIT License](LICENSE).
